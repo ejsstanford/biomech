@@ -1,0 +1,30 @@
+========================================================================
+MODEL STATE CHECK  ·  /tmp/piano_t9_repaired_v2_20260910_112133/assets
+state file last updated 2026-09-07
+========================================================================
+  ok    timestep is 0.00208333 s. Fine for training, but any offline peak-velocity probe must converge the timestep to about 1.3e-4 s, because a fortissimo keystroke lasts only about seven steps at 480 Hz and the force required comes out 2 to 5 per cent high.
+  ok    white_key carries the original as-built values
+  ok    black_key carries the original as-built values
+  ok    root motor ceilings are at or below the proposed values
+  ok    piano_ds6.5.xml measures an octave span of 165.3890 mm, which is 6.5114 in, but its name claims 6.50 in (165.1000 mm). Difference 0.2890 mm. Known and small; the four original keyboards are wide by about 0.29 mm.
+  ok    piano_ds6.xml measures an octave span of 152.6668 mm, which is 6.0105 in, but its name claims 6.00 in (152.4000 mm). Difference 0.2668 mm. Known and small; the four original keyboards are wide by about 0.29 mm.
+
+  FLAG  A keyboard file does not have the octave span its name claims
+        piano_ds5.1.xml measures an octave span of 139.9445 mm, which is
+        5.5096 in, but its name claims 5.10 in (129.5400 mm). Difference
+        10.4045 mm. In June 2026 two of four queued configurations were
+        built with a tenth span where an octave span belonged. Regenerate
+        with make_scaled_keyboards_2026-09-06.py, which measures what it
+        writes.
+        see: make_scaled_keyboards_2026-09-06.py --selftest
+
+  FLAG  A keyboard file does not have the octave span its name claims
+        piano_ds5.5.xml measures an octave span of 129.7668 mm, which is
+        5.1089 in, but its name claims 5.50 in (139.7000 mm). Difference
+        -9.9332 mm. In June 2026 two of four queued configurations were
+        built with a tenth span where an octave span belonged. Regenerate
+        with make_scaled_keyboards_2026-09-06.py, which measures what it
+        writes.
+        see: make_scaled_keyboards_2026-09-06.py --selftest
+
+  2 flag(s) thrown. Read CLAUDE.md before proceeding.

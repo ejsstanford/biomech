@@ -1,0 +1,83 @@
+copied 6 muscle repair files into the scratch tree before measuring. THE SCRATCH TREE IS NOT THE WORKSPACE.
+MuJoCo 3.13.0. McFarland units read: 43.
+The force-length curve's support is 0.61181 to 1.46583, from `gainprm`.
+
+right hand: 44 tendon-driven muscles measured
+left hand: 44 tendon-driven muscles measured
+wrote PROVENANCE, every muscle's range and where its target came from, right hand 2026-09-12.tsv
+wrote PROVENANCE, every muscle's range and where its target came from, left hand 2026-09-12.tsv
+wrote right_hand_actuators_muscle.xml, 44 muscles rewritten
+wrote left_hand_actuators_muscle.xml, 44 muscles rewritten
+
+  muscle     grade   target      lengthrange measured        range          derived L0   tendon   verdict
+  ECRL         A      81.00   316.365  349.525    0.802  1.211      81.00   251.40   ok
+  ECRB         A      58.50   269.988  301.484    0.733  1.271      58.50   227.11   ok
+  ECU          A      62.20   279.060  306.730    0.817  1.262      62.20   228.26   ok
+  FCR          A      62.80   296.075  331.547    0.762  1.327      62.80   248.22   ok
+  FCU          A      50.90   295.596  334.641    0.647  1.414      50.90   262.67   ok
+  PL           A      63.80   312.359  362.820    0.613  1.404      63.80   273.25   ok
+  PT           D      26.88   147.935  170.893    0.612  1.466      26.88   131.49   ok
+  PQ           D      17.67    22.080   37.167    0.612  1.466      17.67    11.27   ok
+  FDS5        A-f     74.93   365.638  429.632    0.612  1.466      74.93   319.79   ok
+  FDS4         A      73.60   422.251  480.902    0.640  1.437      73.60   375.12   ok
+  FDS3        A-f     91.59   313.114  391.334    0.612  1.466      91.59   257.08   ok
+  FDS2         A      83.50   322.682  392.709    0.620  1.458      83.50   270.95   ok
+  FDP5         A      74.90   369.868  427.678    0.653  1.425      74.90   320.97   ok
+  FDP4         A      79.80   350.733  414.907    0.637  1.441      79.80   299.92   ok
+  FDP3         A      83.50   337.619  402.304    0.651  1.426      83.50   283.22   ok
+  FDP2        A-f     89.55   329.105  405.581    0.612  1.466      89.55   274.32   ok
+  EDC5         A      65.00   378.372  425.236    0.728  1.449      65.00   331.06   ok
+  EDC4        A-f     72.95   389.518  451.816    0.612  1.466      72.95   344.89   ok
+  EDC3         A      72.40   396.152  453.333    0.676  1.466      72.40   347.21   ok
+  EDC2         A      70.00   392.793  451.194    0.632  1.466      70.00   348.59   ok
+  EDM          A      67.50   373.904  416.304    0.753  1.381      67.50   323.09   ok
+  EIP          A      58.90   240.511  289.472    0.635  1.466      58.90   203.13   ok
+  EPL         A-f     79.18   260.140  327.763    0.612  1.466      79.18   211.70   ok
+  EPB          A      67.50   150.212  194.077    0.714  1.364      67.50   102.02   ok
+  FPL         A-f     60.29   233.005  284.495    0.612  1.466      60.29   196.12   ok
+  APL          A      71.30   217.608  241.633    0.809  1.146      71.30   159.92   ok
+  OP           A      43.60    34.330   52.438    0.765  1.180      43.60     0.98   ok
+  FPB          A      50.90    43.579   65.750    0.753  1.188      50.90     5.27   ok
+  AdP         A-f     52.97    23.863   69.100    0.451  1.305      52.97     0.00   ok
+  APB          A      51.10    40.468   53.987    0.792  1.056      51.10     0.00   ok
+  FDM          A      49.83    50.824   66.062    0.719  1.024      49.83    15.02   ok
+  ADM          A      56.70    61.268   71.793    0.841  1.026      56.70    13.60   ok
+  RI2          B      21.90    31.418   50.125    0.612  1.466      21.90    18.02   ok
+  LU_RB2       C      16.17    90.509  104.317    0.612  1.466      16.17    80.62   ok
+  UI_UB2       C      18.39    91.158  106.867    0.612  1.466      18.39    79.90   ok
+  RI3          B      18.46    35.890   51.654    0.612  1.466      18.46    24.60   ok
+  LU_RB3       C      16.12    83.727   97.491    0.612  1.466      16.12    73.87   ok
+  UI_UB3       C      11.20    86.898   96.467    0.612  1.466      11.20    80.04   ok
+  RI4          B      19.81    42.620   59.536    0.612  1.466      19.81    30.50   ok
+  LU_RB4       C       9.31    71.745   79.692    0.612  1.466       9.31    66.05   ok
+  UI_UB4       C      11.22    75.279   84.864    0.612  1.466      11.22    68.41   ok
+  RI5          B      20.66    27.126   44.770    0.612  1.466      20.66    14.49   ok
+  LU_RB5       C      20.74    90.427  108.142    0.612  1.466      20.74    77.74   ok
+  UI_UB5       D      15.81    89.530  103.035    0.612  1.466      15.81    79.86   ok
+
+  feasible: 44 of 44
+
+  where the measured window differs from the declared one by more than 1 mm:
+    FCU        declared  293.357  332.707   measured  295.596  334.641   moves   +2.239   +1.934
+    FDS5       declared  354.916  423.992   measured  365.638  429.632   moves  +10.722   +5.640
+    FDS2       declared  330.149  392.331   measured  322.682  392.709   moves   -7.467   +0.378
+    FDP5       declared  387.224  450.745   measured  369.868  427.678   moves  -17.356  -23.067
+    FDP4       declared  348.164  417.976   measured  350.733  414.907   moves   +2.569   -3.069
+    FDP3       declared  336.078  398.672   measured  337.619  402.304   moves   +1.541   +3.632
+    FDP2       declared  336.953  402.610   measured  329.105  405.581   moves   -7.848   +2.971
+    EDC5       declared  381.709  426.592   measured  378.372  425.236   moves   -3.337   -1.356
+    EDC4       declared  391.706  456.154   measured  389.518  451.816   moves   -2.188   -4.338
+    EDC3       declared  399.791  456.735   measured  396.152  453.333   moves   -3.639   -3.402
+    EDC2       declared  395.914  455.475   measured  392.793  451.194   moves   -3.121   -4.281
+    EDM        declared  377.070  417.549   measured  373.904  416.304   moves   -3.166   -1.245
+    EIP        declared  245.809  291.046   measured  240.511  289.472   moves   -5.298   -1.574
+    EPL        declared  253.147  327.478   measured  260.140  327.763   moves   +6.993   +0.285
+    EPB        declared  146.292  199.276   measured  150.212  194.077   moves   +3.920   -5.199
+    FPL        declared  222.870  279.670   measured  233.005  284.495   moves  +10.135   +4.825
+    APL        declared  216.562  242.392   measured  217.608  241.633   moves   +1.046   -0.759
+    OP         declared   31.426   51.871   measured   34.330   52.438   moves   +2.904   +0.567
+    AdP        declared   19.504   69.106   measured   23.863   69.100   moves   +4.359   -0.006
+    LU_RB2     declared   90.345  105.889   measured   90.509  104.317   moves   +0.164   -1.572
+    UI_UB2     declared   91.326  105.141   measured   91.158  106.867   moves   -0.168   +1.726
+    LU_RB3     declared   82.760   98.832   measured   83.727   97.491   moves   +0.967   -1.341
+    RI4        declared   43.557   58.459   measured   42.620   59.536   moves   -0.937   +1.077

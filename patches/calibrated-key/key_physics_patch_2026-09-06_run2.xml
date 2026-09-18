@@ -1,0 +1,170 @@
+<!--
+  Calibrated key classes for MUSIC-Hand-v0.15.  RUN 2, 6 September 2026.
+  SUPERSEDES key_physics_patch_2026-09-06.xml, which is kept beside this file.
+  NOT YET APPLIED to the working copy or the cluster.
+
+  WHY RUN 2 EXISTS
+  ----------------
+  Run 1 calibrated the key against down-weight alone and reported that 93 gf
+  would be needed to hold the key at the bottom of its travel. That figure is
+  absurd against a real grand, whose up-weight is about 20 to 25 gf, and the
+  objection is what exposed the real defect:
+
+    THE MODEL HAS NO COULOMB FRICTION IN THE KEY JOINT.
+
+  On a real action, down-weight and up-weight differ by twice the friction.
+  Technicians treat this as three linked numbers:
+      down-weight  = balance weight + friction
+      up-weight    = balance weight - friction
+      balance      = (down + up) / 2 ,  friction = (down - up) / 2
+  With no friction term, a model cannot separate down-weight from up-weight
+  at all. Run 1's spring produced, measured by quasi-static probe:
+
+      white key as built:  down  2.8 gf   up  85.8 gf   friction -41.5 gf
+      black key as built:  down  4.2 gf   up 165.0 gf   friction -80.4 gf
+
+  Negative friction is not a physical quantity. The as-built key is inverted:
+  almost nothing to start it moving, an enormous force to keep it down.
+
+  Run 2 adds joint friction and calibrates all three numbers together.
+
+  A SOLVER SETTING IS REQUIRED, AND IT IS EASY TO MISS
+  ----------------------------------------------------
+  MuJoCo's frictionloss silently leaks unless the no-slip pass is enabled.
+  Tested in isolation at frictionloss 0.020 N m:
+
+      default solver:            0.005 N m of torque already moved the joint
+      noslip_iterations="10":    0.015 N m held, 0.021 N m moved
+
+  So <option> must gain noslip_iterations. The model's current <option> line
+  has none, which means friction added without it would do nothing and the
+  calibration would silently fail. Change required in defaults.xml:
+
+      <option timestep="0.00208333333" impratio="10" gravity="0 0 0"
+              noslip_iterations="10"/>
+
+  TARGET AND RESULT
+  -----------------
+  Target: down-weight 48 gf and up-weight 22 gf, measured at each key's own
+  front edge, matching Steinway New York grand mid-register regulation
+  (down 48, up 20 or more, so friction near 13).
+
+  Achieved, by bisection in simulation:
+      white:  down 48.1 gf   up 24.1 gf   friction 12.0 gf   balance 36.1 gf
+      black:  down 48.1 gf   up 24.6 gf   friction 11.7 gf   balance 36.4 gf
+
+  Both key types are calibrated to the same feel AT THEIR OWN FRONT EDGE,
+  which is what a technician regulates for. Their geometry differs, so the
+  parameter values differ: the black key's playing point is 96 mm from its
+  pivot against the white key's 148 mm.
+
+  No measured down-weight or mass for a grand BLACK key could be found in the
+  literature. The black key figures here are therefore targeted to match the
+  white keys in feel, not fitted to a measurement. Flag that in any write-up.
+
+  WHERE ON THE KEY, WHICH THE MODEL CAN NOW REPRESENT
+  ---------------------------------------------------
+  Touch weight goes as one over the distance from the pivot, so it depends on
+  where the finger lands. Same spring, same friction, moment arm varied:
+
+    white key
+      148 mm   down 48.1   up 24.1   balance 36.1   front edge, reference
+      130 mm   down 54.8   up 27.5   balance 41.1   ordinary playing
+      110 mm   down 64.7   up 32.5   balance 48.6   reaching between blacks
+       95 mm   down 74.9   up 37.6   balance 56.3   thumb wedged in on a chord
+       80 mm   down 89.0   up 44.6   balance 66.8   as far back as playable
+
+    black key
+       96 mm   down 48.1   up 24.6   balance 36.4   front edge
+       80 mm   down 57.7   up 29.5   balance 43.6   ordinary playing
+       65 mm   down 71.1   up 36.4   balance 53.7   deep in
+
+  Playing 110 mm in rather than 148 raises down-weight by 35 per cent; 80 mm
+  in raises it by 85 per cent.
+
+  THIS IS A RESEARCH RESULT, NOT ONLY A CALIBRATION NOTE.
+  A smaller hand is pushed further back on the white keys, because reaching
+  between the black keys and placing a thumb inside a chord both move the
+  contact point toward the pivot. The model logs contact position, so the
+  touch weight a given hand actually meets is computable rather than assumed.
+  That is a mechanism by which a standard keyboard costs a small hand more,
+  and it is separate from span. It has not been proposed in the lab's
+  documents and it should be tested.
+
+  Caveat: the standard position along the key at which technicians measure
+  down-weight could not be established from the literature. Conventions in
+  circulation disagree. Every figure above therefore names its own measuring
+  position rather than claiming a standard one.
+
+  UNCHANGED FROM RUN 1, AND STILL VALID
+  -------------------------------------
+  key mass 120 g white, from Hirschkorn's weighed grand key (Table A.1 to be
+    re-verified directly before publication); 62 g black, scaled, unmeasured
+  armature restated as the reflected inertia of the whippen, jack, repetition
+    lever and hammer, which a single-body key must lump somewhere
+  damping 0.30, calibrated against key-speed bands but bracketed rather than
+    settled, because the two published sources disagree: Furuya's forces and
+    speeds are from a Yamaha U1 upright, Askenfelt and Jansson's speeds from
+    a grand. Agrees with both at piano, with the grand alone at forte.
+
+  GRAVITY
+  -------
+  These figures assume the gravity field stays at zero. Run 1 first said
+  gravity would add resistance; that was wrong and was corrected. The key
+  body's centre of mass sits on the playing side of its hinge, so gravity
+  drives the key DOWN by 60 gf equivalent at the white-key front. With the
+  spring below and gravity on, the key falls and stays down.
+
+  Deeper cause: a real grand key pivots at a balance rail 217.2 mm along a
+  key spanning about 421 mm, so half its mass counterbalances the front. This
+  model hinges the key at one END. Absorbing that in the spring preload works
+  but makes the spring do a counterweight's job. The honest fix is a
+  counterweight body behind the hinge, which would also bring the key's
+  inertia nearer a real one. Not built.
+
+  WHAT IS STILL NOT MODELLED
+  --------------------------
+  No hammer, no whippen, no jack, no repetition lever. Therefore no
+  escapement, no let-off step, no drop, no after-touch, and no hammer whose
+  velocity determines the sound.
+-->
+
+<default class="white_key">
+  <!-- travel depth 0.01 m at 0.148 m from the pivot: arcsin(0.01/0.148) -->
+  <joint type="hinge" axis="1 0 0" pos="0 0 0" limited="true"
+         range="-0.0676190854 0"
+         solreflimit=".01 1" solimplimit=".95 .99 .001"
+         stiffness="0.05080" springref="1.0"
+         frictionloss="0.01887"
+         damping="0.30" armature="2.1422e-3"/>
+  <geom group="2" type="box" condim="3" contype="9" conaffinity="0"
+        solref=".02 1" solimp=".9 .95 .001" margin="0" priority="1"
+        size="0.011313735 0.074 0.0105" pos="0 0.074 0"
+        mass="0.120" rgba=".9 .9 .9 1"/>
+</default>
+
+<default class="black_key">
+  <!-- travel depth 0.008 m at 0.096 m from the pivot: arcsin(0.008/0.096) -->
+  <joint type="hinge" axis="1 0 0" pos="0 0 0" limited="true"
+         range="-0.08333333333 0"
+         solreflimit=".01 1" solimplimit=".95 .99 .001"
+         stiffness="0.03295" springref="1.0"
+         frictionloss="0.01224"
+         damping="0.30" armature="9.0000e-4"/>
+  <geom group="2" type="box" condim="3" contype="9" conaffinity="0"
+        solref=".02 1" solimp=".9 .95 .001" margin="0" priority="1"
+        size="0.00475 0.048 0.01" pos="0 0.048 0"
+        mass="0.062" rgba=".1 .1 .1 1"/>
+</default>
+
+<!--
+  DERIVATION, for the record. Balance weight 35 gf, friction 13 gf.
+    white, arm 0.148 m
+      stiffness    = 0.035 * 9.80665 * 0.148 / 1.0 rad = 0.05080 N m/rad
+      frictionloss = 0.013 * 9.80665 * 0.148           = 0.01887 N m
+    black, arm 0.096 m
+      stiffness    = 0.035 * 9.80665 * 0.096 / 1.0 rad = 0.03295 N m/rad
+      frictionloss = 0.013 * 9.80665 * 0.096           = 0.01224 N m
+  springref 1.0 rad is far outside the 0.068 rad of travel, so spring force
+  varies by under 7 per cent across the stroke and reads as near constant.
+-->

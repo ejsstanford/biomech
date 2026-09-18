@@ -1,0 +1,56 @@
+======================================================================================================================
+D3, THE range CORRECTION, FEASIBILITY ACROSS ALL 44, measured on the tree carrying the whole repair
+MuJoCo 3.12.0. Millimetres. Active force-length window lmin to lmax = 0.50 to 1.60 for every muscle.
+======================================================================================================================
+  L0 = span/(r1-r0). L_T = lengthrange[0] - r0*L0. L_T >= 0 requires r0 <= lengthrange[0]*(r1-r0)/span.
+  The widest window MuJoCo's active range admits is r0 = 0.50 to r1 = 1.60, so width at most 1.10.
+  A muscle therefore admits a non-negative derived tendon if and only if span/lengthrange[0] <= 2.20.
+
+muscle     span/lo  width needed at r0=0.50  r1 would be   verdict
+AdP          2.543                    1.272        1.772   NO range EXISTS
+PQ           0.683                    0.342        0.842   feasible
+RI5          0.651                    0.325        0.825   feasible
+OP           0.651                    0.325        0.825   feasible
+RI2          0.597                    0.299        0.799   feasible
+FPB          0.509                    0.255        0.755   feasible
+RI3          0.422                    0.211        0.711   feasible
+EPB          0.362                    0.181        0.681   feasible
+RI4          0.342                    0.171        0.671   feasible
+APB          0.334                    0.167        0.667   feasible
+FDM          0.300                    0.150        0.650   feasible
+EPL          0.294                    0.147        0.647   feasible
+FPL          0.255                    0.127        0.627   feasible
+FDS3         0.253                    0.127        0.627   feasible
+FDP4         0.201                    0.100        0.600   feasible
+LU_RB5       0.196                    0.098        0.598   feasible
+FDP2         0.195                    0.097        0.597   feasible
+FDS5         0.195                    0.097        0.597   feasible
+LU_RB3       0.194                    0.097        0.597   feasible
+FDS2         0.188                    0.094        0.594   feasible
+FDP3         0.186                    0.093        0.593   feasible
+EIP          0.184                    0.092        0.592   feasible
+ADM          0.178                    0.089        0.589   feasible
+LU_RB2       0.172                    0.086        0.586   feasible
+EDC4         0.165                    0.082        0.582   feasible
+FDP5         0.164                    0.082        0.582   feasible
+PL           0.163                    0.082        0.582   feasible
+UI_UB5       0.159                    0.079        0.579   feasible
+PT           0.156                    0.078        0.578   feasible
+UI_UB2       0.151                    0.076        0.576   feasible
+EDC2         0.150                    0.075        0.575   feasible
+EDC3         0.142                    0.071        0.571   feasible
+FDS4         0.138                    0.069        0.569   feasible
+FCU          0.134                    0.067        0.567   feasible
+UI_UB4       0.132                    0.066        0.566   feasible
+FCR          0.120                    0.060        0.560   feasible
+APL          0.119                    0.060        0.560   feasible
+EDC5         0.118                    0.059        0.559   feasible
+ECRB         0.117                    0.058        0.558   feasible
+LU_RB4       0.116                    0.058        0.558   feasible
+UI_UB3       0.110                    0.055        0.555   feasible
+EDM          0.107                    0.054        0.554   feasible
+ECRL         0.105                    0.052        0.552   feasible
+ECU          0.099                    0.050        0.550   feasible
+
+  43 of 44 muscles admit a range that keeps the derived tendon non-negative.
+  1 do not: AdP

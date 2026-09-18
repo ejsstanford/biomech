@@ -1,0 +1,37 @@
+THE ELEVEN LINES THIS CHANGES IN EACH FILE
+  muscle printed cm2   x 50.8     was   lengthrange
+  FPB           0.66    33.53    80.0   0.043570 0.065755   was 20.000 mm span
+  AdP           1.94    98.55   100.0   0.019504 0.069106   was 20.000 mm span
+  APB           0.68    34.54    42.7   0.040461 0.053989   was 20.000 mm span
+  FDM           0.54    27.43    30.0   0.050818 0.066062   was 20.000 mm span
+  ADM           0.89    45.21    12.3   0.061263 0.072174   was 20.000 mm span
+  root motors: force 100 -> 78 N on all three axes; torque 100 -> 12, 8, 12 N m about x, y, z
+
+
+right hand compiles: 35 bodies, 50 actuators, 44 tendons
+  ok   R:force_x   forcerange [-78.  78.]
+  ok   R:force_y   forcerange [-78.  78.]
+  ok   R:force_z   forcerange [-78.  78.]
+  ok   R:torque_x  forcerange [-12.  12.]
+  ok   R:torque_y  forcerange [-8.  8.]
+  ok   R:torque_z  forcerange [-12.  12.]
+  ok   R:FPB  declared   33.53 N, reachable   33.66 N, 100.4 per cent
+  ok   R:AdP  declared   98.55 N, reachable   98.96 N, 100.4 per cent
+  ok   R:APB  declared   34.54 N, reachable   34.67 N, 100.4 per cent
+  ok   R:FDM  declared   27.43 N, reachable   27.54 N, 100.4 per cent
+  ok   R:ADM  declared   45.21 N, reachable   45.39 N, 100.4 per cent
+
+left hand compiles: 35 bodies, 50 actuators, 44 tendons
+  ok   L:force_x   forcerange [-78.  78.]
+  ok   L:force_y   forcerange [-78.  78.]
+  ok   L:force_z   forcerange [-78.  78.]
+  ok   L:torque_x  forcerange [-12.  12.]
+  ok   L:torque_y  forcerange [-8.  8.]
+  ok   L:torque_z  forcerange [-12.  12.]
+  ok   L:FPB  declared   33.53 N, reachable   33.66 N, 100.4 per cent
+  ok   L:AdP  declared   98.55 N, reachable   98.96 N, 100.4 per cent
+  ok   L:APB  declared   34.54 N, reachable   34.67 N, 100.4 per cent
+  ok   L:FDM  declared   27.43 N, reachable   27.54 N, 100.4 per cent
+  ok   L:ADM  declared   45.21 N, reachable   45.39 N, 100.4 per cent
+
+every check passed

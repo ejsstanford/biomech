@@ -1,0 +1,20 @@
+PEAK ACTIVE FORCE OVER THE DECLARED OPERATING WINDOW, ALL 44 MUSCLES
+Schumann Lab, September 10, 2026, biomechanical model t9. MuJoCo 3.12.0.
+
+THIS IS A NULL RESULT AND IT IS FILED SO THAT NOBODY REPEATS IT.
+
+The measurement: sweep normalized length across the declared lengthrange in 401 steps and take
+the largest value MuJoCo's own force-length curve returns, for every muscle, on the shipped tree
+and on the tree carrying the whole repair.
+
+The answer in both conditions, for all 44 muscles: exactly 100.0 percent of declared force.
+
+That is true by construction rather than by measurement. MuJoCo's force-length curve peaks at
+1.0 at L = L0, and L0 sits inside the declared window whatever the window is, so this quantity
+cannot distinguish a correct window from a wrong one and it is not a check of anything.
+
+IT IS NOT THE 100.4 PER CENT FIGURE THE RECORD QUOTES. That figure is force actually deliverable
+at reachable postures, which is a different quantity, and it is measured by
+  Model changes ready to apply 2026-09-07/make_actuator_files_2026-09-07.py --verify
+whose output on the repaired tree is filed beside this file as make_verify.txt. It printed
+100.4 percent for all ten muscle checks across the two hands, and "every check passed".

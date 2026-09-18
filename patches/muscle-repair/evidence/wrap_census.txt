@@ -1,0 +1,13 @@
+tendons parsed: 44
+with a live wrap pairing: 34
+with NO wrap pairing at all (10):
+   ADM, APB, AdP, FDM, FPB, LU_RB4, OP, RI3, RI4, RI5
+
+the seven muscles carrying a negative derived tendon slack length, against wrap status:
+   AdP     NO wrapping surface
+   OP      NO wrapping surface
+   RI5     NO wrapping surface
+   PQ      wraps
+   RI2     wraps
+   FPB     NO wrapping surface
+   RI3     NO wrapping surface

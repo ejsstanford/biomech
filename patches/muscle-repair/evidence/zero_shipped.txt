@@ -1,0 +1,110 @@
+====================================================================================================
+CAN THIS MODEL EXPRESS THE COST OF A WIDE SPAN?   ·   7 September 2026
+====================================================================================================
+
+declared loss  force variation the model actually produces across the muscle's
+               own excursion, at full activation, measured from actuator_force
+true loss      force variation MuJoCo's own force-length curve would give over
+               the normalised range implied by McFarland's L0 and tendon slack
+off curve      whether the true normalised length leaves MuJoCo's 0.5 to 1.6
+               window, where active force falls to zero
+*              the McFarland mapping for this unit is an inference, not stated
+               anywhere in the model files
+
+muscle    as-built norm len  zero force  declared   true norm len    true
+                               as built      loss                    loss
+ECRL         0.79 to   1.14          no     1.58x   0.90 to  1.30   1.88x  
+ECRB         0.75 to   1.05          no     2.00x   0.82 to  1.35   2.16x  
+ECU          0.76 to   1.05          no     1.84x   0.83 to  1.25   1.19x  
+FCR          0.75 to   1.05          no     1.94x   0.83 to  1.39   3.31x  
+FCU          0.77 to   1.06          no     1.71x   0.62 to  1.37   2.72x  
+PL           0.76 to   1.05          no     1.82x   0.70 to  1.46   3.04x  
+PT           0.76 to   1.06          no     1.88x   not in McFarland        -  
+PQ           0.75 to   1.05          no     2.01x   not in McFarland        -  
+FDS5         0.80 to   1.06          no     1.50x   0.86 to  2.06  to zero  
+FDS4         0.48 to   0.78         YES   to zero   0.77 to  1.57  88.36x  
+FDS3         0.68 to   1.05          no     4.07x   0.33 to  1.37  to zero  
+FDS2         0.70 to   1.05          no     3.01x   0.52 to  1.38  70.57x  
+FDP5         0.50 to   0.77          no   to zero   0.55 to  1.32  18.67x  
+FDP4         0.76 to   1.04          no     1.85x   0.73 to  1.54  19.71x  
+FDP3         0.71 to   1.07          no     2.82x   0.39 to  1.28  to zero  
+FDP2         0.71 to   1.06          no     2.74x   0.31 to  1.33  to zero  
+EDC5         0.73 to   1.04          no     2.42x   0.75 to  1.47   5.16x  
+EDC4         0.74 to   1.03          no     2.18x   0.77 to  1.76  to zero  
+EDC3         0.73 to   1.03          no     2.35x   0.74 to  1.53  18.78x  
+EDC2         0.73 to   1.03          no     2.28x   0.63 to  1.47   1.39x  
+EDM          0.73 to   1.04          no     2.44x   0.64 to  1.27   3.89x  
+EIP          0.71 to   1.04          no     2.71x   0.84 to  1.67  to zero  
+EPL          0.77 to   1.05          no     1.77x   0.50 to  1.80  to zero  
+EPB          0.77 to   1.02          no     1.70x   0.52 to  1.16 370.51x  
+FPL          0.80 to   1.08          no     1.46x   0.65 to  1.59 149.35x  
+APL          0.50 to   0.90         YES   to zero   0.78 to  1.22   1.22x  
+OP           0.79 to   1.06          no     1.53x   0.73 to  1.14   2.11x  
+FPB          0.50 to   0.83          no   to zero   0.72 to  1.16   2.18x   <-- one of the five
+AdP          0.44 to   1.19         YES   to zero  -0.34 to  0.98  to zero   <-- one of the five
+APB          0.53 to   0.73          no   to zero   0.32 to  0.58  to zero   <-- one of the five
+FDM          0.54 to   0.77          no    50.31x   0.89 to  1.20   1.16x   <-- one of the five
+ADM          0.84 to   1.01          no     1.24x   0.93 to  1.12   1.04x   <-- one of the five
+RI2          0.75 to   1.25          no     2.18x  -0.25 to  0.46  to zero *
+LU_RB2       0.78 to   1.23          no     1.78x   1.32 to  1.54  21.91x *
+UI_UB2       0.75 to   1.09          no     2.09x   2.32 to  2.84  to zero *
+RI3          0.75 to   1.06          no     1.99x   0.40 to  0.91  to zero *
+LU_RB3       0.77 to   1.04          no     1.76x   1.19 to  1.41   3.89x *
+UI_UB3       0.78 to   0.98          no     1.59x   2.14 to  2.44  to zero *
+RI4          0.73 to   1.07          no     2.36x   0.57 to  1.10  25.55x *
+LU_RB4       0.53 to   0.76          no   to zero   1.03 to  1.15   1.14x *
+UI_UB4       0.62 to   0.81          no     6.53x   2.01 to  2.35  to zero *
+RI5         -0.47 to   0.93         YES   to zero   0.10 to  0.66  to zero *
+LU_RB5       0.17 to   1.73         YES   to zero   1.46 to  1.75  to zero *
+UI_UB5       0.68 to   1.32          no     4.40x   not in McFarland        -  
+
+====================================================================================================
+FINDING 1, and it needs no comparison with anything.
+  9 of 44 muscles reach essentially zero active force, under
+  one per cent of their own peak, at postures the model's own joint limits allow:
+     FDS4, FDP5, APL, FPB, AdP, APB, LU_RB4, RI5, LU_RB5
+  Of those, 5 go strictly below MuJoCo's lower bound of 0.5 L0:
+     FDS4, APL, AdP, RI5, LU_RB5
+  The rest sit just above it, where the force-length curve has already fallen to
+  almost nothing.
+  3 of the five added muscles are in this list: FPB, AdP, APB.
+  Note FDM, if absent from the list, still comes within a factor of fifty of
+  zero on the shipped file, so treat all five as compromised there.
+  6 of the thirty-nine original muscles are in it: FDS4, FDP5, APL, LU_RB4, RI5, LU_RB5. Those are NOT touched by any patch
+  written so far and are a separate item.
+  This is a defect in the declared operating window, not in the anatomy. The
+  window is meant to cover the excursion the joints allow, and for these it does
+  not. It is the same defect the added-muscle patch fixes for the five.
+
+FINDING 2, which does depend on the McFarland comparison.
+  16 muscles would leave the force-length window in reality, on
+  McFarland's optimal fibre lengths, at postures where the model keeps a healthy
+  fraction of peak force. For those the model understates the cost of the posture.
+
+WHAT THIS MEANS FOR THE STUDY'S QUESTION.
+  Activation is force demanded over force available. A muscle whose available
+  force collapses at an extreme posture will report high activation there for a
+  reason that is arithmetic rather than physiological, and a muscle whose
+  available force never changes will report activation that carries no posture
+  information at all. The model as built does both, in different muscles. So the
+  answer to the question in the title is: not yet, and not uniformly.
+
+HOW TO READ THE TABLE. A declared loss near 1.0 means the model gives that muscle
+almost the same force everywhere in its range. A true loss much larger than the
+declared loss means the real muscle would weaken where the model does not.
+'to zero' means active force reaches essentially nothing somewhere in range, and
+a ratio against it would not be a meaningful number.
+
+CAVEATS THAT MATTER FOR HOW FAR THIS CAN BE PUSHED.
+1. The sweep takes joints to their declared limits independently, ignoring
+   self-collision and ignoring whether a hand can adopt the combination. It is
+   an upper bound on excursion, so the losses are upper bounds too.
+2. McFarland's L0 and tendon slack belong to McFarland's tendon routing. Where
+   the two models route a muscle differently, notably APB and AdP, the true
+   normalised length computed here is not McFarland's and is not this model's
+   either. Those rows are indicative only.
+3. Eleven of the mappings are inferences from naming, marked with a star. The
+   model files do not say what RI, UI_UB and LU_RB represent.
+4. This says nothing about whether a trained policy visits these postures. A
+   muscle can be badly parameterised at an extreme the task never reaches.
+   Answering that needs a trained policy and the logged joint trajectories.

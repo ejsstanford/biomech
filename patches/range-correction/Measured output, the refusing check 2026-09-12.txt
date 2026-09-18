@@ -1,0 +1,8 @@
+  EXEMPTED BY NAME, below the declared support and accepted with its cost recorded: AdP at 0.45050 to 1.30452
+  1 window(s) below the usable support 0.61181 to 1.46583, which is permitted only where the provenance row states the cost: AdP at 0.45050 to 1.30452
+right hand: 44 muscles checked, 0 not corrected by construction. zero active force 1, passive above 10 percent 41
+  EXEMPTED BY NAME, below the declared support and accepted with its cost recorded: AdP at 0.45050 to 1.30452
+  1 window(s) below the usable support 0.61181 to 1.46583, which is permitted only where the provenance row states the cost: AdP at 0.45050 to 1.30452
+left hand: 44 muscles checked, 0 not corrected by construction. zero active force 1, passive above 10 percent 41
+
+PASSED. Every muscle's range matches its table's target, the table matches the model, no derived tendon is negative, no window leaves the curve's support, the two hands agree, and neither fault count regressed.

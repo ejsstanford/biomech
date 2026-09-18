@@ -1,0 +1,29 @@
+========================================================================================================
+PASSIVE FORCE ACROSS ALL 44 MUSCLES, at the reachable posture where it is largest
+MuJoCo 3.12.0   ·   active force is zero outside normalised 0.5 to 1.6
+threshold for the count: passive force above 10% of declared force
+========================================================================================================
+
+
+### shipped   (44 muscles measured)
+
+muscle     declared N  passive N  passive %   total N  total %  norm len  active min %
+LU_RB5          47.90     120.60      251.8    120.60    251.8     1.731          0.00
+UI_UB5          47.90      35.77       74.7     56.29    117.5     1.322         26.73
+RI2             61.20      32.11       52.5     68.61    112.1     1.270         50.63
+LU_RB2          61.20      24.05       39.3     66.75    109.1     1.233         62.45
+AdP            100.00      25.12       25.1    105.80    105.8     1.187          0.00
+ECRL           337.30      48.40       14.3    348.47    103.3     1.141         66.72
+PT             557.20      14.01        2.5    560.43    100.6     1.059         53.56  (control)
+PL             101.00       2.01        2.0    101.46    100.5     1.053         57.01  (control)
+FCR            407.90       7.50        1.8    409.63    100.4     1.050         52.67  (control)
+PQ             284.70       5.14        1.8    285.89    100.4     1.050         50.01  (control)
+ECRB           252.20       4.53        1.8    253.25    100.4     1.050         52.13  (control)
+ECU            192.90       2.99        1.5    193.59    100.4     1.046         58.38  (control)
+
+  6 muscles carry passive force above 10% of declared at some reachable posture:
+     AdP, ECRL, LU_RB2, LU_RB5, RI2, UI_UB5
+  7 muscles fall under one per cent of their own peak ACTIVE force:
+     APL, AdP, FDP5, FDS4, FPB, LU_RB5, RI5
+  control band: the six muscles whose shipped window already matched the
+  geometry carry at most 2.5 per cent of declared force passively.
