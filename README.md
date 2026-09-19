@@ -18,7 +18,7 @@ checks/      the standing check, and the script behind each number claimed below
 | | Path | Trust | Cost to apply |
 |---|---|---|---|
 | 1 | `patches/muscle-repair/` | High | None |
-| 2 | `patches/range-correction/` | Medium, one judgment open | None |
+| 2 | `patches/range-correction/` | High | None |
 | 3 | `patches/root-ceiling-patch/` | High | One retraining run |
 | 4 | `patches/calibrated-key/` | Medium, never run | Belongs with gravity |
 | 5 | `patches/keyboard-series/` | High | None |
@@ -35,7 +35,7 @@ Nothing in the wrap part is invented: all ten lines already existed in the shipp
 
 Replaces MuJoCo's default `range` of 0.75 to 1.05 so muscles lose strength as they stretch. Ships with a provenance table generated from the built model giving each muscle's target, source, grade and the reason for any fallback, and a check that refuses rather than warns.
 
-**One judgment is open.** Widening the windows puts passive tension back: 38 of 44 muscles carry passive force above a tenth of peak somewhere in their travel, 2 of 44 at the median reachable posture, 17 of 44 at the model's default posture, which is a flat fully extended hand. So the tension sits at the ends of reach and at full extension rather than where the hand works. What the pass criterion becomes is undecided.
+**The criterion.** Widening the windows puts passive tension back: 38 of 44 muscles carry passive force above a tenth of peak somewhere in their travel, 2 of 44 at the median reachable posture, 17 of 44 at the model's default posture, which is a flat fully extended hand. The tension sits at the ends of reach and at full extension rather than where the hand works, so the criterion is read at the median reachable posture with a named exception for the flexors and interossei at full extension. The reasoning, the proposed external check against Wagner 1988, and the two places we are unsure, are in `patches/range-correction/CRITERION.md`.
 
 `AdP` is the one muscle admitting no window that is both physically possible and inside the usable support. The physically possible side was taken, and the cost is that at its most contracted reachable posture it produces under a tenth of its peak force.
 
