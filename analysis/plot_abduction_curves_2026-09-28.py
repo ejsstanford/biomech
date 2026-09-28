@@ -15,7 +15,7 @@ plt.rcParams.update({'font.family':'serif','font.size':10,'axes.titlesize':11.5,
 INK='#1a1a1a'; RED='#a03020'; BLUE='#2b5578'; GREY='#9a9a9a'; SOFT='#666'
 
 fig=plt.figure(figsize=(14.2,6.6))
-gs=fig.add_gridspec(1,3,wspace=0.30,top=0.615,bottom=0.240,left=0.055,right=0.985)
+gs=fig.add_gridspec(1,3,wspace=0.30,top=0.615,bottom=0.275,left=0.055,right=0.985)
 ax=[fig.add_subplot(gs[0,i]) for i in range(3)]
 
 def span_axis(a):
@@ -55,7 +55,9 @@ fig.text(0.055,0.829,'Negative angles are the thumb tucked toward the palm, zero
 fig.text(0.055,0.105,'FORCE TRANSFER is effective mass at the thumb tip, the quantity the goals document asks for: the inertia the key actually feels through that finger. It is identical on all three trees',fontsize=8.6,color=SOFT)
 fig.text(0.055,0.077,'because it carries no muscle parameter, so it is a null rather than corroboration of the other two panels.  STRENGTH and AGILITY are this project\'s own recorded columns. Their formulas',fontsize=8.6,color=SOFT)
 fig.text(0.055,0.049,'were never written down and have not been recovered, so the shapes and the within-curve ratios are the result and the absolute values are the less certain part.',fontsize=8.6,color=SOFT)
-fig.text(0.055,0.026,'Measured on the shipped model and on the STEP 1 tree, the September 10 muscle repair WITH the September 12 range correction, at the flat default posture, which Step 1 cannot hold.',fontsize=7.8,color='#999')
-fig.text(0.055,0.006,'On the muscle repair alone, strength peaks at -4.2 deg and falls 41.5 percent from it, not -7.3 and 46.4. Data in AI_Model_CL/, the two CSVs named "three channels".',fontsize=7.6,color='#999')
+fig.text(0.055,0.044,'POSTURE IS NOT A DETAIL. Curling the finger that is pressing takes what the key feels from 261.6 to 580.6 g at the index and 255.6 to 618.0 at the middle; holding the hand firm rather than',fontsize=8.2,color='#a03020')
+fig.text(0.055,0.028,'letting it give is a further factor of 4.9. These curves are at ONE posture and are quoted as that, never as the figure. Flat fingers are defensible here only because the thumb is what is measured.',fontsize=8.2,color='#a03020')
+fig.text(0.055,0.010,'Measured on the shipped model and on the STEP 1 tree, the September 10 muscle repair WITH the September 12 range correction, at the flat default posture, which Step 1 cannot hold.',fontsize=7.8,color='#999')
+fig.text(0.055,-0.006,'On the muscle repair alone, strength peaks at -4.2 deg and falls 41.5 percent from it, not -7.3 and 46.4. Data in AI_Model_CL/, the two CSVs named "three channels".',fontsize=7.6,color='#999')
 fig.savefig(D+"FIGURE, force transfer and agility against abduction angle 2026-09-28.png",dpi=190)
 print("written")

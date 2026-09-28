@@ -46,7 +46,7 @@ def octl(a):
     a.axvline(OCT_F,color=GREEN,lw=1.0,ls='--',zorder=1); a.axvline(OCT_D,color=GREY,lw=1.0,ls=':',zorder=1)
 
 fig=plt.figure(figsize=(14.6,11.2))
-gs=fig.add_gridspec(2,3,hspace=0.55,wspace=0.42,top=0.760,bottom=0.145,left=0.058,right=0.972)
+gs=fig.add_gridspec(2,3,hspace=0.55,wspace=0.42,top=0.760,bottom=0.185,left=0.058,right=0.972)
 A=fig.add_subplot(gs[0,0]); B=fig.add_subplot(gs[0,1]); C=fig.add_subplot(gs[0,2])
 E=fig.add_subplot(gs[1,0]); F=fig.add_subplot(gs[1,1]); T=fig.add_subplot(gs[1,2]); T.axis('off')
 
@@ -136,8 +136,10 @@ fig.text(0.058,0.905,'Panels 2, 3 and 5 use the model with the muscle fix only, 
 fig.text(0.058,0.880,'Dashed green line: the stretch an octave needs at the front of the keys, 142.8 mm.     Dotted grey line: the stretch it needs among the black keys, 165.4 mm.',fontsize=9.8,color=SOFT)
 fig.text(0.058,0.046,'Panels 3 and 5 reproduce this project’s earlier numbers exactly. Panel 2 uses a force definition written down in build_curves_2026-09-28.py: it agrees with the earlier figures within',fontsize=8,color=GREY)
 fig.text(0.058,0.024,'0.5 to 6.7 percent and matches their shape, but the earlier definition was never recorded anywhere, so panel 2’s absolute numbers are the less certain of the two.',fontsize=8,color=GREY)
-fig.text(0.058,0.100,'THE KEYBOARD is the model’s own, a 6.5 inch octave. White keys are 22.6 mm wide and 148 mm deep;',fontsize=8.6,color=SOFT)
-fig.text(0.058,0.082,'black keys reach only 96 mm in, so the front 52 mm of every white key is clear of them. That is why',fontsize=8.6,color=SOFT)
-fig.text(0.058,0.064,'an octave taken at the front needs 22.6 mm less stretch than one taken further in.',fontsize=8.6,color=SOFT)
+fig.text(0.058,0.118,'POSTURE IS NOT A DETAIL. Curling the finger that is pressing more than doubles what the key feels, 261.6 to 580.6 g at the index; holding the hand firm rather than letting it give',fontsize=8.6,color='#a03020')
+fig.text(0.058,0.100,'is a further factor of 4.9. Panels 2, 3 and 5 are at ONE posture, the flat default, which nobody plays from. Quote them as figures at that posture, never as the figure.',fontsize=8.6,color='#a03020')
+fig.text(0.058,0.074,'THE KEYBOARD is the model’s own, a 6.5 inch octave. White keys are 22.6 mm wide and 148 mm deep;',fontsize=8.6,color=SOFT)
+fig.text(0.058,0.056,'black keys reach only 96 mm in, so the front 52 mm of every white key is clear of them. That is why',fontsize=8.6,color=SOFT)
+fig.text(0.058,0.038,'an octave taken at the front needs 22.6 mm less stretch than one taken further in.',fontsize=8.6,color=SOFT)
 fig.savefig(OUT+'/FIGURES, the measured curves 2026-09-28_run2.png',dpi=190)
 print('written')

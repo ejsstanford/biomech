@@ -101,6 +101,33 @@ These replace two shipped files whose contents are swapped: `piano_ds5.1.xml` me
 
 ---
 
+## `analysis/` — the curves, and the one thing to know before quoting them
+
+`build_curves_2026-09-28.py` sweeps thumb abduction at a stated finger posture and writes every
+channel together with each row's holdability and finger overlap, so no row can be read without
+knowing whether its posture is valid. `plot_abduction_curves_2026-09-28.py` and
+`plot_the_curves_2026-09-28.py` draw the two figures beside them.
+
+**POSTURE IS NOT A DETAIL IN THIS MODEL, and it is larger than the effect the curves report.**
+Measured September 28, 2026: curling the finger that is pressing takes what the key feels from
+**261.6 to 580.6 grams** at the index and 255.6 to 618.0 at the middle. Holding the hand firm rather
+than letting the joints give is a further **factor of 4.9**, 53.9 grams against 261.6 at one
+posture. Against those, the whole thumb abduction sweep moves force transfer by 35.8 percent.
+
+**So every figure here is a figure at one posture, never the figure.** These curves were measured
+with the fingers flat, which is a fully extended hand and is not a posture anyone plays from. That
+is defensible for the thumb sweep, because the thumb is the finger being measured and curling the
+others moves it by a third of one percent, **and it does not generalize to anything else.**
+
+The generator writes the posture into the header of every CSV and prints the warning on every run at
+the flat default, so the number cannot be separated from the condition it was measured under.
+
+**Two of the three channels are this project's own recorded columns whose formulas were never
+written down and have not been recovered.** Force transfer, meaning effective mass at the fingertip,
+reproduces the record exactly and is validated on nine independent figures. Strength agrees within
+0.5 to 6.7 percent and matches the shape. Agility does not reproduce at all. Read the generator's
+docstring before trusting any column.
+
 ## `checks/` — how to disbelieve any number above
 
 `check_model_state.py` is the standing check: it compares a copy against recorded settled values and fails with its reasoning rather than a number. It does not inspect tendon wrapping, length ranges or where a file came from, so passing it is not evidence that a copy is what it should be. The checksums establish that.

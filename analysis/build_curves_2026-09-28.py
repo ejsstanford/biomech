@@ -91,9 +91,18 @@ WHAT EACH COLUMN IS
       touch, and 7 of 10 contacts at a measured human resting posture sit inside
       the 1 mm geom margin without overlapping.
 
-POSTURE. --mcp, --pip and --dip are degrees of flexion applied to all four
-fingers, measured FROM THE FLAT DEFAULT, which is qpos0 and is zero at every
-finger joint. They are NOT the "curl" fraction of earlier scripts: that
+POSTURE, AND IT IS THE LARGEST THING ON THIS PAGE. --mcp, --pip and --dip are
+degrees of flexion applied to all four fingers, measured FROM THE FLAT DEFAULT,
+which is qpos0 and is zero at every finger joint.
+
+**Posture is not a detail in this model and no curve should be quoted without
+it.** Curling the finger that is pressing takes what the key feels from 261.6 to
+580.6 grams at the index and 255.6 to 618.0 at the middle. Holding the hand firm
+rather than letting the joints give is a further factor of 4.9, 53.9 grams
+against 261.6 at one posture. Both are larger than the 35.8 percent the whole
+thumb abduction sweep produces. Every CSV this writes carries its posture and
+this warning in its header, so the number cannot be separated from the condition
+it was measured under. They are NOT the "curl" fraction of earlier scripts: that
 parameterised each joint as `lower limit + curl x range`, so curl 0.00 put every
 joint at its lower limit, which is 30 degrees of hyperextension at the knuckle,
 and that was misread as the default. R28 withdrew the claim that followed.
@@ -275,7 +284,19 @@ def main():
 
     cols = list(rows[0].keys())
     out = a.out or f"curve_{a.hand}_mcp{a.mcp:g}_pip{a.pip:g}_dip{a.dip:g}.csv"
+    flat = (a.mcp == 0 and a.pip == 0 and a.dip == 0)
     with open(out, "w") as f:
+        f.write(f"# FINGER POSTURE: MCP {a.mcp}, PIP {a.pip}, DIP {a.dip} degrees of flexion "
+                f"from the flat default. Hand: {a.hand}. Assets: {a.assets}\n")
+        f.write("# POSTURE IS NOT A DETAIL IN THIS MODEL. Curling the finger that is pressing\n"
+                "# takes what the key feels from 261.6 to 580.6 g at the index and 255.6 to\n"
+                "# 618.0 at the middle, measured September 28, 2026. Holding the hand firm\n"
+                "# rather than letting the joints give is a further factor of 4.9. So a curve\n"
+                "# measured at one posture is a curve at that posture and nothing more.\n")
+        if flat:
+            f.write("# THIS SWEEP IS AT THE FLAT DEFAULT, which is a fully extended hand and is\n"
+                    "# not a posture anyone plays from. It is defensible only where the finger\n"
+                    "# being measured is the one being moved. Say so wherever these are quoted.\n")
         f.write(",".join(cols) + "\n")
         for r in rows:
             f.write(",".join(f"{r[c]:.18e}" for c in cols) + "\n")
@@ -295,6 +316,11 @@ def main():
               "inherits an equilibrium the model cannot satisfy.")
     if ov > 0.5:
         print("CAUTION: fingers interpenetrate deeper than P28's 0.5 mm criterion.")
+    if flat:
+        print("CAUTION: this sweep is at the FLAT DEFAULT, a fully extended hand, which nobody\n"
+              "         plays from. Curling the pressing finger more than doubles what the key\n"
+              "         feels, and holding the hand firm rather than letting it give is a further\n"
+              "         factor of 4.9. Quote these as figures at one posture, never as the figure.")
     print(f"written: {out}")
 
 
