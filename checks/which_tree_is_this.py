@@ -13,8 +13,8 @@ tells you what you actually have.
 
     python3 which_tree_is_this.py <assets_dir>
 
-Exit 0 for a recognised, intentional tree. Exit 1 for the mixed tree or for
-anything unrecognised. No dependencies beyond the standard library.
+Exit 0 for a recognized, intentional tree. Exit 1 for the mixed tree or for
+anything unrecognized. No dependencies beyond the standard library.
 
 Every hash below was measured on September 28, 2026 by building each tree from
 `piano.tar.gz` and reading it, not copied from a document.
@@ -79,7 +79,7 @@ REPORT = {
 
   It offers 0.2412 Nm against opening to an octave, within four percent of the
   0.25 Nm probe Wagner applied to 238 pianists, and it is the only version with
-  that behaviour at all.
+  that behavior at all.
 
   KNOWN AND DOCUMENTED: it cannot hold its own default posture. 15 of 23
   muscle-actuated hand degrees of freedom carry 6.59 Nm that no activation
@@ -129,7 +129,7 @@ def main():
     state = STATES.get(tuple(got))
     print(f"\n  tree: {root}\n")
     if state is None:
-        print("  UNRECOGNISED. These six files match no combination on record.\n")
+        print("  UNRECOGNIZED. These six files match no combination on record.\n")
         for (sub, name), h in zip(SIX, got):
             print(f"    {h}  {sub}/{name}")
         print("\n  Either something else has been edited, or this is a version newer than")
