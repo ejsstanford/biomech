@@ -1,0 +1,93 @@
+<!-- RANGE CORRECTION, all 44 muscles, mixed target. Schumann Lab, September 12, 2026.
+     Built by build_range_correction_2026-09-12.py. Every `range` and every
+     `lengthrange` in this file is generated, and the provenance table beside
+     it says where each target came from and what grade it carries.
+     DO NOT hand-edit. Rebuild instead. -->
+<!--
+  left hand muscle actuators, with recomputed `lengthrange` for seven original muscles.
+  Schumann Lab, 8 September 2026. Base: the added-muscle drop-in files plus the three recomputed
+
+  Seven changed lines against the base file and nothing else:
+    ECRL, FDS3, RI2, LU_RB2, UI_UB3, UI_UB4, UI_UB5
+
+  Each value is the operating length range MuJoCo's own compiler computes from the model's
+  geometry with the attribute deleted, cross-checked against an independent kinematic
+  sweep of every joint that moves the tendon. RI2 is the ONE EXCEPTION: MuJoCo's
+  lengthrange computation does not converge on RI2 and refuses to build the model, so
+  RI2's value is the kinematic sweep alone. That is a hand-supplied value and any methods
+  section should say so.
+
+  APPLIED NOWHERE by whoever generated this file. Copy it over the base file only on
+  Elizabeth Schumann's decision. Reasoning and every number:
+    Biomechanical piano model, findings and plan 2026-09-06/
+      The seven stale original length ranges, findings 2026-09-08.md
+-->
+<mujocoinclude model="MUSIC-Hand-v0.15">
+<!-- Modified from MyoHand and add five additional muscle-tendon units: AdP, FPB, APB, ADM, and FDM. -->
+
+<!-- original license from MyoHand
+    =================================================
+	Copyright 2020 Vikash Kumar, Vittorio Caggiano, Huawei Wang
+	Model	:: Myo Hand (MuJoCoV2.0)
+	Author	:: Vikash Kumar (vikashplus@gmail.com), Vittorio Caggiano, Huawei Wang
+	source	:: https://github.com/vikashplus
+	License	:: Under Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License. 
+    ======================================================
+-->
+    <actuator>
+        <muscle name="L:ECRL" force="337.3" class="muscle" tendon="L:ECRL_tendon" lengthrange="0.316365 0.349525" range="0.80207 1.21145"/>
+        <muscle name="L:ECRB" force="252.2" class="muscle" tendon="L:ECRB_tendon" lengthrange="0.269988 0.301484" range="0.73301 1.27140"/>
+        <muscle name="L:ECU" force="192.9" class="muscle" tendon="L:ECU_tendon" lengthrange="0.279060 0.306730" range="0.81675 1.26161"/>
+        <muscle name="L:FCR" force="407.9" class="muscle" tendon="L:FCR_tendon" lengthrange="0.296075 0.331547" range="0.76196 1.32680"/>
+        <muscle name="L:FCU" force="479.8" class="muscle" tendon="L:FCU_tendon" lengthrange="0.295596 0.334641" range="0.64684 1.41393"/>
+        <muscle name="L:PL" force="101.0" class="muscle" tendon="L:PL_tendon" lengthrange="0.312359 0.362820" range="0.61295 1.40387"/>
+        <muscle name="L:PT" force="557.2" class="muscle" tendon="L:PT_tendon" lengthrange="0.147935 0.170893" range="0.61181 1.46583"/>
+        <muscle name="L:PQ" force="284.7" class="muscle" tendon="L:PQ_tendon" lengthrange="0.022080 0.037167" range="0.61181 1.46583"/>
+        <muscle name="L:FDS5" force="75.3" class="muscle" tendon="L:FDS5_tendon" lengthrange="0.365638 0.429632" range="0.61181 1.46583"/>
+        <muscle name="L:FDS4" force="171.2" class="muscle" tendon="L:FDS4_tendon" lengthrange="0.422251 0.480902" range="0.64038 1.43727"/>
+        <muscle name="L:FDS3" force="258.8" class="muscle" tendon="L:FDS3_tendon" lengthrange="0.313114 0.391334" range="0.61181 1.46583"/>
+        <muscle name="L:FDS2" force="162.5" class="muscle" tendon="L:FDS2_tendon" lengthrange="0.322682 0.392709" range="0.61950 1.45815"/>
+        <muscle name="L:FDP5" force="236.8" class="muscle" tendon="L:FDP5_tendon" lengthrange="0.369868 0.427678" range="0.65291 1.42474"/>
+        <muscle name="L:FDP4" force="172.9" class="muscle" tendon="L:FDP4_tendon" lengthrange="0.350733 0.414907" range="0.63673 1.44092"/>
+        <muscle name="L:FDP3" force="212.4" class="muscle" tendon="L:FDP3_tendon" lengthrange="0.337619 0.402304" range="0.65148 1.42615"/>
+        <muscle name="L:FDP2" force="197.3" class="muscle" tendon="L:FDP2_tendon" lengthrange="0.329105 0.405581" range="0.61181 1.46583"/>
+        <muscle name="L:EDC5" force="139.4" class="muscle" tendon="L:EDC5_tendon" lengthrange="0.378372 0.425236" range="0.72788 1.44886"/>
+        <muscle name="L:EDC4" force="109.2" class="muscle" tendon="L:EDC4_tendon" lengthrange="0.389518 0.451816" range="0.61181 1.46583"/>
+        <muscle name="L:EDC3" force="94.4" class="muscle" tendon="L:EDC3_tendon" lengthrange="0.396152 0.453333" range="0.67604 1.46583"/>
+        <muscle name="L:EDC2" force="48.8" class="muscle" tendon="L:EDC2_tendon" lengthrange="0.392793 0.451194" range="0.63153 1.46583"/>
+        <muscle name="L:EDM" force="72.4" class="muscle" tendon="L:EDM_tendon" lengthrange="0.373904 0.416304" range="0.75283 1.38098"/>
+        <muscle name="L:EIP" force="47.3" class="muscle" tendon="L:EIP_tendon" lengthrange="0.240511 0.289472" range="0.63457 1.46583"/>
+        <muscle name="L:EPL" force="88.3" class="muscle" tendon="L:EPL_tendon" lengthrange="0.260140 0.327763" range="0.61181 1.46583"/>
+        <muscle name="L:EPB" force="46" class="muscle" tendon="L:EPB_tendon" lengthrange="0.150212 0.194077" range="0.71389 1.36374"/>
+        <muscle name="L:FPL" force="201" class="muscle" tendon="L:FPL_tendon" lengthrange="0.233005 0.284495" range="0.61181 1.46583"/>
+        <muscle name="L:APL" force="116.7" class="muscle" tendon="L:APL_tendon" lengthrange="0.217608 0.241633" range="0.80910 1.14606"/>
+        <muscle name="L:OP" force="180" class="muscle" tendon="L:OP_tendon" lengthrange="0.034330 0.052438" range="0.76500 1.18032"/>
+        <!-- MUSIC-Hand Added Muscle Property Start-->
+        <muscle name="L:FPB" force="33.53" class="muscle" tendon="L:FPB_tendon" lengthrange="0.043579 0.065750" range="0.75261 1.18819"/>
+        <muscle name="L:AdP" force="98.55" class="muscle" tendon="L:AdP_tendon" lengthrange="0.023863 0.069100" range="0.45050 1.30452"/>
+        <muscle name="L:APB" force="34.54" class="muscle" tendon="L:APB_tendon" lengthrange="0.040468 0.053987" range="0.79193 1.05649"/>
+        <muscle name="L:FDM" force="27.43" class="muscle" tendon="L:FDM_tendon" lengthrange="0.050824 0.066062" range="0.71856 1.02436"/>
+        <muscle name="L:ADM" force="45.21" class="muscle" tendon="L:ADM_tendon" lengthrange="0.061268 0.071793" range="0.84081 1.02644"/>
+        <!-- MUSIC-Hand Added Muscle Property End-->
+        <muscle name="L:RI2" force="61.2" class="muscle" tendon="L:RI2_tendon" lengthrange="0.031418 0.050125" range="0.61181 1.46583"/>
+        <muscle name="L:LU_RB2" force="61.2" class="muscle" tendon="L:LU_RB2_tendon" lengthrange="0.090509 0.104317" range="0.61181 1.46583"/>
+        <muscle name="L:UI_UB2" force="61.2" class="muscle" tendon="L:UI_UB2_tendon" lengthrange="0.091158 0.106867" range="0.61181 1.46583"/>
+        <muscle name="L:RI3" force="61.2" class="muscle" tendon="L:RI3_tendon" lengthrange="0.035890 0.051654" range="0.61181 1.46583"/>
+        <muscle name="L:LU_RB3" force="98" class="muscle" tendon="L:LU_RB3_tendon" lengthrange="0.083727 0.097491" range="0.61181 1.46583"/>
+        <muscle name="L:UI_UB3" force="98" class="muscle" tendon="L:UI_UB3_tendon" lengthrange="0.086898 0.096467" range="0.61181 1.46583"/>
+        <muscle name="L:RI4" force="97.0" class="muscle" tendon="L:RI4_tendon" lengthrange="0.042620 0.059536" range="0.61181 1.46583"/>
+        <muscle name="L:LU_RB4" force="76.9" class="muscle" tendon="L:LU_RB4_tendon" lengthrange="0.071745 0.079692" range="0.61181 1.46583"/>
+        <muscle name="L:UI_UB4" force="76.9" class="muscle" tendon="L:UI_UB4_tendon" lengthrange="0.075279 0.084864" range="0.61181 1.46583"/>
+        <muscle name="L:RI5" force="59.9" class="muscle" tendon="L:RI5_tendon" lengthrange="0.027126 0.044770" range="0.61181 1.46583"/>
+        <muscle name="L:LU_RB5" force="47.9" class="muscle" tendon="L:LU_RB5_tendon" lengthrange="0.090427 0.108142" range="0.61181 1.46583"/>
+        <muscle name="L:UI_UB5" force="47.9" class="muscle" tendon="L:UI_UB5_tendon" lengthrange="0.089530 0.103035" range="0.61181 1.46583"/>
+
+
+        <motor site="L:root_joint" name="L:force_x" ctrlrange="-78 78" ctrllimited="true" forcerange="-78 78" gear="1 0 0 0 0 0"/>
+        <motor site="L:root_joint" name="L:force_y" ctrlrange="-78 78" ctrllimited="true" forcerange="-78 78" gear="0 1 0 0 0 0"/>
+        <motor site="L:root_joint" name="L:force_z" ctrlrange="-78 78" ctrllimited="true" forcerange="-78 78" gear="0 0 1 0 0 0"/>
+        <motor site="L:root_joint" name="L:torque_x" ctrlrange="-12 12" ctrllimited="true" forcerange="-12 12" gear="0 0 0 1 0 0"/>
+        <motor site="L:root_joint" name="L:torque_y" ctrlrange="-8 8" ctrllimited="true" forcerange="-8 8" gear="0 0 0 0 1 0"/>
+        <motor site="L:root_joint" name="L:torque_z" ctrlrange="-12 12" ctrllimited="true" forcerange="-12 12" gear="0 0 0 0 0 1"/>
+    </actuator>
+</mujocoinclude>

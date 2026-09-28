@@ -1,6 +1,6 @@
 # biomech
 
-Corrections and patches for the piano hand model `MUSIC-Hand-v0.15`, built on MyoHand by Pei Xu, Yufei Ye and Ruocheng Wang. Every artifact here replaces a file in the shipped model rather than adding geometry. **None has been applied to a working copy or to a cluster.**
+Corrections and patches for the piano hand model `MUSIC-Hand-v0.15`, built on MyoHand by Pei Xu, Yufei Ye and Ruocheng Wang. Every artifact here replaces a file in the shipped model rather than adding geometry. **Applied and verified on a fresh extraction of `piano.tar.gz`, three times independently, on September 28, 2026. Not yet applied to a working copy or to a cluster.**
 
 **Who built this, and how much weight it carries.** Built by Elizabeth Schumann working with Claude between September 6 and September 12, 2026. None of it has been reviewed by anyone who works on this model, and that review is what we are asking for. Where a choice was made, the reasoning is written out so it can be disagreed with rather than accepted. Every number below was measured by building the model and reading it, not by inspecting the files.
 
@@ -13,15 +13,37 @@ checks/      the standing check, and the script behind each number claimed below
 
 ---
 
-## The five patches
+## The patches
 
 | | Path | Trust | Cost to apply |
 |---|---|---|---|
-| 1 | `patches/muscle-repair/` | High | None |
-| 2 | `patches/range-correction/` | High | None |
-| 3 | `patches/root-ceiling-patch/` | High | One retraining run |
-| 4 | `patches/calibrated-key/` | Medium, never run | Belongs with gravity |
-| 5 | `patches/keyboard-series/` | High | None |
+| 1 | **`patches/step1/`** | High | None. **This is the muscle work to apply. Six files** |
+| | `patches/muscle-repair/` | High | **A component of step1.** Usable alone, deliberately. Never on top of step1 |
+| | `patches/range-correction/` | High | **A component of step1.** Never on top of step1 |
+| 2 | `patches/root-ceiling-patch/` | High | One retraining run |
+| 3 | `patches/calibrated-key/` | Medium, never run | Belongs with gravity |
+| 4 | `patches/keyboard-series/` | High | None |
+
+**Why step1 is six files and not nine.** The range correction's actuator file already carries every
+actuator change the muscle repair made, recomputed on the wrapped geometry: of the 22 actuators the
+repair alters against pristine, **zero are left unchanged by the range correction.** So the set is
+the correction's two actuator files and the repair's four definition files, and `patches/step1/`
+holds exactly those.
+
+**What goes wrong if you apply both components.** Whichever lands second wins. Apply the repair
+second and its actuator files overwrite the correction's, **every corrected `range` value reverts,
+and the tree looks changed because the definition files are still there.** The standing check passes
+on it.
+
+**So do not rely on reading this.** Run
+
+```
+python3 checks/which_tree_is_this.py <your tree>/assets
+```
+
+It reads the six files and names which of four states the tree is in: pristine, repair only, step1,
+or the mixed tree above, which it refuses. It needs nothing but the standard library and it takes no
+measurable time.
 
 ### 1. `patches/muscle-repair/` — six files, three per hand
 
@@ -33,11 +55,29 @@ Nothing in the wrap part is invented: all ten lines already existed in the shipp
 
 ### 2. `patches/range-correction/` — per-muscle `range`, all 44
 
-Replaces MuJoCo's default `range` of 0.75 to 1.05 so muscles lose strength as they stretch. Ships with a provenance table generated from the built model giving each muscle's target, source, grade and the reason for any fallback, and a check that refuses rather than warns.
+Replaces MuJoCo's default `range` of 0.75 to 1.05 so muscles lose strength as they stretch. Ships with a provenance table generated from the built model giving each muscle's target, source, grade and the reason for any fallback.
 
-**The criterion.** Widening the windows puts passive tension back: 38 of 44 muscles carry passive force above a tenth of peak somewhere in their travel, 2 of 44 at the median reachable posture, 17 of 44 at the model's default posture, which is a flat fully extended hand. The tension sits at the ends of reach and at full extension rather than where the hand works, so the criterion is read at the median reachable posture with a named exception for the flexors and interossei at full extension. The reasoning, the proposed external check against Wagner 1988, and the two places we are unsure, are in `patches/range-correction/CRITERION.md`.
+**The criterion.** Widening the windows puts passive tension back: 41 of 44 muscles carry passive force above a tenth of peak somewhere in their travel, 1 of 44 at the median reachable posture, 17 of 44 at the model's default posture, which is a flat fully extended hand. The tension sits at the ends of reach and at full extension rather than where the hand works, so the criterion is read at the median reachable posture with a named exception for the flexors and interossei at full extension. The reasoning, the proposed external check against Wagner 1988, and the two places we are unsure, are in `patches/range-correction/CRITERION.md`.
 
 `AdP` is the one muscle admitting no window that is both physically possible and inside the usable support. The physically possible side was taken, and the cost is that at its most contracted reachable posture it produces under a tenth of its peak force.
+
+**What this correction costs, measured September 28, 2026 and not hidden.** The corrected model
+**cannot hold its own default posture.** With every muscle activation free, 15 of 23 muscle-actuated
+hand degrees of freedom carry torque no activation balances, totalling **6.59 Nm** against the
+shipped model's 0.0032. They are all finger flexors: `mcp3_flexion` at -1.84 Nm, `pm3_flexion` at
+-0.93, `mcp2_flexion` at -0.82, `mcp4_flexion` at -0.51, `mcp4_abduction` at -0.42. **Do not measure
+anything at the default posture on a corrected tree**, and expect
+`checks/check_hand_can_hold_itself_2026-09-28.py` to report FAIL at 6.5921 Nm, which is the correct
+result rather than a sign of a bad apply.
+
+**Why the correction is worth having anyway, and this is the case for it.** Passive torque opposing
+the hand opening: the shipped model and the muscle repair alone both give 0.0000 Nm at a fifth and
+0.0079 Nm at an octave, which says a relaxed hand holds an octave open for nothing. The corrected
+model gives 0.0730 and **0.2412 Nm**, and 0.2412 is within four percent of the **0.25 Nm probe
+Wagner applied to 238 pianists**. **It is the only version with that behaviour at all.** Its fault is
+the onset rather than the size: it resists at a fifth, where there should be nothing. **The thumb
+abduction window is calibrated and correct; the finger flexor windows are what fail, and rebuilding
+them is the next piece of work.**
 
 ### 3. `patches/root-ceiling-patch/` — three lines per hand
 
@@ -64,6 +104,29 @@ These replace two shipped files whose contents are swapped: `piano_ds5.1.xml` me
 ## `checks/` — how to disbelieve any number above
 
 `check_model_state.py` is the standing check: it compares a tree against recorded settled values and fails with its reasoning rather than a number. It does not inspect tendon wrapping, length ranges or where a file came from, so passing it is not evidence that a copy is what it should be. The checksums establish that.
+
+**Three checks added September 28, 2026.**
+
+| script | what it answers | on a correct step1 tree |
+|---|---|---|
+| `which_tree_is_this.py` | which of the four states this tree is in | names it, and refuses the mixed tree |
+| `check_passive_at_median_2026-09-28.py` | the passive force criterion in force | **PASS**, 41 / 1 / 17, both hands |
+| `check_hand_can_hold_itself_2026-09-28.py` | can any activation hold the posture | **FAIL at 6.5921 Nm**, which is expected |
+
+`check_passive_at_median` imports `passive_where_it_actually_sits_2026-09-12.py` rather than
+reimplementing the sampler, and needs `--measurer` pointed at it. **There is one sampler on
+purpose:** the first version of that check reimplemented it and reported 7 at the median against the
+established 1, and the disagreement was caught only by running both on one tree.
+
+**`patches/range-correction/check_range_correction_2026-09-12.py` has been deleted.** It counted
+passive force over each muscle's whole travel and **returned REFUSED on a correctly applied tree**,
+because it tested a criterion retired on September 18, 2026, six days after it was written. Anyone
+who cloned this repository before today has a copy: **do not run it.** Git carries it if the
+reasoning is ever wanted, and `patches/range-correction/Measured output, the refusing check
+2026-09-12.txt` stays as the record of what it said.
+
+**The sampler is at `patches/range-correction/passive_where_it_actually_sits_2026-09-12.py`**, which
+is where `check_passive_at_median` expects to be pointed with `--measurer`.
 
 Each remaining script produces one claim made above or in the write-up.
 

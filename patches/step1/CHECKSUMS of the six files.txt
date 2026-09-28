@@ -1,0 +1,10 @@
+# md5 of the six files, with the paths they occupy INSIDE AN APPLIED TREE, so this
+# file can be diffed directly against the output of the apply command in START HERE
+# section 2. Inside this package they sit under assets_right/ and assets_left/
+# instead, because the package is not a tree.
+18233aa5142c58ea3b0fefb90e135aac  right_assets/right_hand_actuators_muscle.xml
+27b4983d1c84c2e06dea60f1f12fadc4  right_assets/right_hand_definition.xml
+86a48418ef151e01d3ffcbdd8c3a4138  right_assets/right_hand_definition_tendons.xml
+55e30f7ebffa99a8ea6244df0112a3b4  left_assets/left_hand_actuators_muscle.xml
+a98c6ec77f6df2aaa90db7cb919af971  left_assets/left_hand_definition.xml
+6f8e8e6d9b53dd36a552834fca32e789  left_assets/left_hand_definition_tendons.xml
