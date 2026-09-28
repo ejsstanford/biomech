@@ -1,6 +1,6 @@
 # biomech
 
-Corrections and patches for the piano hand model `MUSIC-Hand-v0.15`, built on MyoHand by Pei Xu, Yufei Ye and Ruocheng Wang. Every artifact here replaces a file in the shipped model rather than adding geometry. **Applied and verified on a fresh extraction of `piano.tar.gz`, three times independently, on September 28, 2026. Not yet applied to a working copy or to a cluster.**
+Corrections and patches for the piano hand model `MUSIC-Hand-v0.15`, built on MyoHand by Pei Xu, Yufei Ye and Ruocheng Wang. Every artifact here replaces a file in the shipped model rather than adding geometry. **Applied and verified on a fresh unpacking of `piano.tar.gz`, three times independently, on September 28, 2026. Not yet applied to a working copy or to a cluster.**
 
 **Who built this, and how much weight it carries.** Built by Elizabeth Schumann working with Claude between September 6 and September 12, 2026. None of it has been reviewed by anyone who works on this model, and that review is what we are asking for. Where a choice was made, the reasoning is written out so it can be disagreed with rather than accepted. Every number below was measured by building the model and reading it, not by inspecting the files.
 
@@ -32,17 +32,17 @@ holds exactly those.
 
 **What goes wrong if you apply both components.** Whichever lands second wins. Apply the repair
 second and its actuator files overwrite the correction's, **every corrected `range` value reverts,
-and the tree looks changed because the definition files are still there.** The standing check passes
+and the copy looks changed because the definition files are still there.** The standing check passes
 on it.
 
 **So do not rely on reading this.** Run
 
 ```
-python3 checks/which_tree_is_this.py <your tree>/assets
+python3 checks/which_version_is_this.py <your copy>/assets
 ```
 
-It reads the six files and names which of four states the tree is in: pristine, repair only, step1,
-or the mixed tree above, which it refuses. It needs nothing but the standard library and it takes no
+It reads the six files and names which of four versions the copy is: unchanged, repair only, step1,
+or the mixed copy above, which it refuses. It needs nothing but the standard library and it takes no
 measurable time.
 
 ### 1. `patches/muscle-repair/` — six files, three per hand
@@ -66,7 +66,7 @@ Replaces MuJoCo's default `range` of 0.75 to 1.05 so muscles lose strength as th
 hand degrees of freedom carry torque no activation balances, totalling **6.59 Nm** against the
 shipped model's 0.0032. They are all finger flexors: `mcp3_flexion` at -1.84 Nm, `pm3_flexion` at
 -0.93, `mcp2_flexion` at -0.82, `mcp4_flexion` at -0.51, `mcp4_abduction` at -0.42. **Do not measure
-anything at the default posture on a corrected tree**, and expect
+anything at the default posture on a corrected copy**, and expect
 `checks/check_hand_can_hold_itself_2026-09-28.py` to report FAIL at 6.5921 Nm, which is the correct
 result rather than a sign of a bad apply.
 
@@ -103,23 +103,23 @@ These replace two shipped files whose contents are swapped: `piano_ds5.1.xml` me
 
 ## `checks/` — how to disbelieve any number above
 
-`check_model_state.py` is the standing check: it compares a tree against recorded settled values and fails with its reasoning rather than a number. It does not inspect tendon wrapping, length ranges or where a file came from, so passing it is not evidence that a copy is what it should be. The checksums establish that.
+`check_model_state.py` is the standing check: it compares a copy against recorded settled values and fails with its reasoning rather than a number. It does not inspect tendon wrapping, length ranges or where a file came from, so passing it is not evidence that a copy is what it should be. The checksums establish that.
 
 **Three checks added September 28, 2026.**
 
-| script | what it answers | on a correct step1 tree |
+| script | what it answers | on a correct step1 copy |
 |---|---|---|
-| `which_tree_is_this.py` | which of the four states this tree is in | names it, and refuses the mixed tree |
+| `which_version_is_this.py` | which of the four versions this copy is | names it, and refuses the mixed copy |
 | `check_passive_at_median_2026-09-28.py` | the passive force criterion in force | **PASS**, 41 / 1 / 17, both hands |
 | `check_hand_can_hold_itself_2026-09-28.py` | can any activation hold the posture | **FAIL at 6.5921 Nm**, which is expected |
 
 `check_passive_at_median` imports `passive_where_it_actually_sits_2026-09-12.py` rather than
 reimplementing the sampler, and needs `--measurer` pointed at it. **There is one sampler on
 purpose:** the first version of that check reimplemented it and reported 7 at the median against the
-established 1, and the disagreement was caught only by running both on one tree.
+established 1, and the disagreement was caught only by running both on one copy.
 
 **`patches/range-correction/check_range_correction_2026-09-12.py` has been deleted.** It counted
-passive force over each muscle's whole travel and **returned REFUSED on a correctly applied tree**,
+passive force over each muscle's whole travel and **returned REFUSED on a correctly applied copy**,
 because it tested a criterion retired on September 18, 2026, six days after it was written. Anyone
 who cloned this repository before today has a copy: **do not run it.** Git carries it if the
 reasoning is ever wanted, and `patches/range-correction/Measured output, the refusing check
